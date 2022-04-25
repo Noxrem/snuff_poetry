@@ -2,7 +2,6 @@
   "name": "snuff_poetry",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -12,8 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "next": "^12.1.4",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "next": "12.1.5",
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.5"
   }
 }
