@@ -1,6 +1,7 @@
-const Poetry_Textbox = props => (
+const Poetry_Textbox = ({ poem }) => (
     <div className="poetry-textbox">
-        <p>{props.text}</p>
+        <h2>{poem.title}</h2>
+        <p>{poem.text}</p>
     </div>
 );
 

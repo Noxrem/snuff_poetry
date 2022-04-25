@@ -1,6 +1,5 @@
 import Layout from '../components/Layout';
 import Body from '../components/Body';
-//import data from '../static/schnupf_dataset.json';
 import { getRandomIdx } from '../components/helpers';
 
 const Homepage = ({ poems, count, initPoemIdx }) => (
