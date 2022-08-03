@@ -1,29 +1,29 @@
 
 const Language_Buttons = (props) => (
-    <div className="flex flex-row justify-end" role="group">
+    <div className="flex flex-row justify-end px-1 py-1" role="group">
         <button 
             onClick={props.clickCH} 
             className="
             inline-block
             rounded-l 
-            px-3 py-1.5 
-            border-2 border-blue-600 
-            text-blue-600 font-medium text-xs
-            hover:bg-blue-600
-            active:bg-blue-700 active:text-white
-            focus:bg-blue-600 focus:text-white
+            px-3 py-1 
+            border-4 border-white 
+            bg-white
+            text-slate-800 font-bold text-lg
+            hover:bg-slate-700
+            focus:bg-slate-800 focus:text-white
             "
             >CH</button>
         <button 
             onClick={props.clickDE}
             className="
             inline-block 
-            px-3 py-1.5 
-            border-t-2 border-b-2 border-blue-600 
-            text-blue-600 font-medium text-xs
-            hover:bg-blue-600
-            active:bg-blue-700 active:text-white
-            focus:bg-blue-600 focus:text-white
+            px-3 py-1 
+            border-t-4 border-b-4 border-white 
+            bg-white
+            text-slate-800 font-bold text-lg
+            hover:bg-slate-700
+            focus:bg-slate-800 focus:text-white
             "
             >DE</button>
         <button 
@@ -31,12 +31,12 @@ const Language_Buttons = (props) => (
             className="
             inline-block
             rounded-r 
-            px-3 py-1.5 
-            border-2 border-blue-600 
-            text-blue-600 font-medium text-xs
-            hover:bg-blue-600
-            active:bg-blue-700 active:text-white
-            focus:bg-blue-600 focus:text-white
+            px-3 py-1 
+            border-4 border-white 
+            bg-white
+            text-slate-800 font-bold text-lg
+            hover:bg-slate-700
+            focus:bg-slate-800 focus:text-white
             " 
             >EN</button>
     </div>
