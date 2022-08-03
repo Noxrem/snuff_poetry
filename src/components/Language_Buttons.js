@@ -10,7 +10,6 @@ const Language_Buttons = (props) => (
             border-4 border-white 
             bg-white
             text-slate-800 font-bold text-lg
-            hover:bg-slate-700
             focus:bg-slate-800 focus:text-white
             "
             >CH</button>
@@ -22,7 +21,6 @@ const Language_Buttons = (props) => (
             border-t-4 border-b-4 border-white 
             bg-white
             text-slate-800 font-bold text-lg
-            hover:bg-slate-700
             focus:bg-slate-800 focus:text-white
             "
             >DE</button>
@@ -35,7 +33,6 @@ const Language_Buttons = (props) => (
             border-4 border-white 
             bg-white
             text-slate-800 font-bold text-lg
-            hover:bg-slate-700
             focus:bg-slate-800 focus:text-white
             " 
             >EN</button>
