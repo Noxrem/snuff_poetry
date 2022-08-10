@@ -6,15 +6,10 @@ import de from '../src/constants/de';   // German language package
 import en from '../src/constants/en';   // English language package
 
 function Homepage({ poems, count, initPoemIdx }) {
-  // Router init
-  const { locale, locales, asPath } = useRouter();  // Hook to get the i18n (internationalization) paths
-  const content = (locale === "en") ? en : de;      // Select language package, depending on i18n locale
-
-  // Context init
   
   return (
     <Layout>
-        <h1>{content.subtitle}</h1>
+        
         <Body poems={poems} count={count} initPoemIdx={initPoemIdx}/>
     </Layout>
   );

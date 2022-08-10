@@ -1,3 +1,3 @@
 export default {
-    subtitle: "Willkommen auf der Gentlemen's Snuff Spruch Website.",
+    greeting: "Willkommen auf der Gentlemen's Snuff Spruch Website.",
 };

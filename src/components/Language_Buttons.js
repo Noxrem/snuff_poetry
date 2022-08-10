@@ -14,31 +14,29 @@ const Language_Buttons = (props) => {
 
     return (
         <div className="flex flex-row justify-end px-1 py-1" role="group">
-            
-
-                <button 
-                    onClick={() => updateLang("all")} 
-                    className={`
-                    inline-block
-                    rounded-l 
-                    px-2
-                    border-4 border-white 
-                    ${lang == "all"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
-                    font-bold text-base
-                    focus:bg-slate-800 focus:text-white
-                    `}
-                    >ALL</button>
-                <button 
-                    onClick={() => updateLang("ch")} 
-                    className={`
-                    inline-block
-                    px-2
-                    border-t-4 border-b-4 border-white 
-                    ${lang == "ch"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
-                    font-bold text-base
-                    focus:bg-slate-800 focus:text-white
-                    `}
-                    >CH</button>
+            <button 
+                onClick={() => updateLang("all")} 
+                className={`
+                inline-block
+                rounded-l 
+                px-2
+                border-4 border-white 
+                ${lang == "all"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
+                font-bold text-base
+                focus:bg-slate-800 focus:text-white
+                `}
+                >ALL</button>
+            <button 
+                onClick={() => updateLang("ch")} 
+                className={`
+                inline-block
+                px-2
+                border-t-4 border-b-4 border-white 
+                ${lang == "ch"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
+                font-bold text-base
+                focus:bg-slate-800 focus:text-white
+                `}
+                >CH</button>
             <button 
                 onClick={() => updateLang("de")}
                 className={`

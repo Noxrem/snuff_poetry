@@ -1,6 +1,16 @@
 const Footer = () => (
-    <div className="footer-wrapper">
-        <div className="copyright">© {new Date().getFullYear()} Gentlemen's Snuff</div>
+    <div className="footer-wrapper
+        w-full
+        fixed
+        bottom-0
+        justify-center
+        px-1
+        py-1">
+        <div className="copyright
+            flex justify-center
+            rounded
+            w-full
+            bg-white">© {new Date().getFullYear()} Gentlemen's Snuff</div>
     </div>
 );
 
