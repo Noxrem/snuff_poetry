@@ -12,23 +12,6 @@ const Language_Buttons = (props) => {
         router.push("/", "/", {locale: lang});  // Routes to the chosen locale path
     }
 
-    // Returns tailwind expression according the button activation
-    // const getBtnState = (button) => {
-    //     switch (lang) {
-    //         case "ALL":
-    //             //return ()
-    //             break;
-    //         case "CH":
-    //             break;
-    //         case "DE":
-    //             break;
-    //         case "EN":
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
     return (
         <div className="flex flex-row justify-end px-1 py-1" role="group">
             
