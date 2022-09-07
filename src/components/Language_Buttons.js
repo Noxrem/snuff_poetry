@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';    
 
 const Language_Buttons = (props) => {
-    const router = useRouter();
-
-    const [lang, setLang] = useState("all");    // State stores selected language
+    // Initialize router
+    const router = useRouter();     // Get the url router for the locale
+    
+    const [lang, setLang] = useState(router.locale);    // State stores selected language the default is the set router locale
 
     const updateLang = (lang) => {
         setLang(lang);  // Set the state to the new language
