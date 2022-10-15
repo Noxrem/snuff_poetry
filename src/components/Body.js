@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import de from '../constants/de';   // German language package
 import en from '../constants/en';   // English language package
 import ch from '../constants/ch';   // Swiss German language package
+import { filteredPoems } from '../constants/helpers';   // Function to filter poems
 import { allowedStatusCodes } from 'next/dist/lib/load-custom-routes';
 
 export const Body = ({ poems, count, initPoemIdx }) => {
@@ -22,7 +23,7 @@ export const Body = ({ poems, count, initPoemIdx }) => {
         break;
         default: content = de;
     }
-
+    //const fltPoems = filteredPoems(poems, locale, )
     const [poem, setPoem] = useState(poems[initPoemIdx]);
 
     const updatePoem = () => {
