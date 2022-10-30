@@ -5,7 +5,8 @@ const Poetry_Textbox = ({ poem }) => (
             mt-4
             mb-4
             text-3xl underline font-bold
-            text-white">{poem.title}</div>
+            text-white">{poem.title}
+        </div>
         <div className="
             flex justify-center
             whitespace-pre-wrap
@@ -15,7 +16,9 @@ const Poetry_Textbox = ({ poem }) => (
             rounded
             bg-white
             text-center
-            text-base text-slate-800">{poem.text}</div>
+            text-base text-slate-800
+            overflow-auto">{poem.text}
+        </div>
     </div>
 );
 
