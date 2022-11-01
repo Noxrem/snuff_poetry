@@ -8,6 +8,7 @@ const Poetry_Textbox = ({ poem }) => (
             text-white">{poem.title}
         </div>
         <div className="
+            flex-grow
             whitespace-pre-wrap
             text-clip
             mx-1
