@@ -1,5 +1,5 @@
 const Poetry_Textbox = ({ poem }) => (
-    <div className="poetry-textbox flex flex-col h-full">
+    <>
         <div className="
             mt-4
             mb-4
@@ -8,19 +8,21 @@ const Poetry_Textbox = ({ poem }) => (
             text-white">{poem.title}
         </div>
         <div className="
+            flex-grow
             whitespace-pre-wrap
-            h-full
             text-clip
-            overflow-auto
             mx-1
             my-1
             px-1 py-1
             rounded
             bg-white
             text-center
-            text-base text-slate-800">{poem.text}
+            text-base text-slate-800
+            mb-4
+            max-h-max
+            overflow-scroll">{poem.text}
         </div>
-    </div>
+    </>
 );
 
 export default Poetry_Textbox;

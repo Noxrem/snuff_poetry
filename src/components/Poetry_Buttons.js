@@ -1,6 +1,6 @@
 
 const Poetry_Buttons = props => (
-    <div className="poetry-buttons-wrapper flex flex-row justify-center mb-10">
+    <div className="poetry-buttons-wrapper flex flex-row justify-center mb-4">
         <button className="
         inline-block
         w-16
