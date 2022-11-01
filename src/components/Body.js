@@ -31,9 +31,9 @@ export const Body = ({ poems, count, initPoemIdx }) => {
     }
 
     return (
-        <div className="body-wrapper">
+        <div className="body-wrapper flex flex-col h-full items-stretch">
             <div className="
-            flex items-center justify-center
+            items-center justify-center
             mx-1
             my-1
             px-1 py-1
@@ -44,7 +44,8 @@ export const Body = ({ poems, count, initPoemIdx }) => {
             text-slate-800
             ">{content.greeting}</div>
             <Poetry_Textbox poem={poem}/>
-            <Poetry_Buttons clickRefresh={updatePoem}/>
+            <Poetry_Buttons clickRefresh={updatePoem} className="
+                self-end"/>
         </div>
     )
 

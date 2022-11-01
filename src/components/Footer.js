@@ -1,8 +1,6 @@
 const Footer = () => (
     <div className="footer-wrapper
         w-full
-        fixed
-        bottom-0
         justify-center
         px-1
         py-1">
