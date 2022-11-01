@@ -31,23 +31,21 @@ export const Body = ({ poems, count, initPoemIdx }) => {
     }
 
     return (
-        <div className="body-wrapper flex flex-col h-full">
-            <div className="flex flex-col h-full">
-                <div className="
-                items-center
-                mx-1
-                my-1
-                px-1 py-1
-                rounded
-                bg-white
-                text-center
-                text-base
-                text-slate-800
-                ">{content.greeting}</div>
-                <Poetry_Textbox poem={poem} className="h-full"/>
-            </div>
+        <>
+            <div className="
+            items-center
+            mx-1
+            my-1
+            px-1 py-1
+            rounded
+            bg-white
+            text-center
+            text-base
+            text-slate-800"
+            >{content.greeting}</div>
+            <Poetry_Textbox poem={poem} className=""/>
             <Poetry_Buttons clickRefresh={updatePoem} className=""/>
-        </div>
+        </>
     )
 
 }
