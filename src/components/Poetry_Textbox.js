@@ -19,8 +19,9 @@ const Poetry_Textbox = ({ poem }) => (
             text-center
             text-base text-slate-800
             mb-4
+            h-full
             max-h-max
-            overflow-scroll">{poem.text}
+            overflow-auto">{poem.text}
         </div>
     </>
 );
