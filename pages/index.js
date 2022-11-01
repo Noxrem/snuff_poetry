@@ -14,7 +14,6 @@ function Homepage({ poems, count, initPoemIdx }) {
 
   return (
     <Layout>
-        {/* <Body poems={filteredPoems} count={filteredCount} initPoemIdx={filteredRandomIdx}/> */}
         <Body poems={poems} count={count} initPoemIdx={initPoemIdx}/>
     </Layout>
   );

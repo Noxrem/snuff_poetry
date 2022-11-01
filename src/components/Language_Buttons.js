@@ -21,10 +21,11 @@ const Language_Buttons = (props) => {
                 inline-block
                 rounded-l 
                 px-2
-                border-4 border-white 
+                border-l-4 border-t-4 border-b-4 border-white 
                 ${lang == "all"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
+                hover:bg-slate-700 hover:text-white
                 `}
                 >ALL</button>
             <button 
@@ -36,6 +37,7 @@ const Language_Buttons = (props) => {
                 ${lang == "ch"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
+                hover:bg-slate-700 hover:text-white
                 `}
                 >CH</button>
             <button 
@@ -47,6 +49,7 @@ const Language_Buttons = (props) => {
                 ${lang == "de"?"bg-slate-800 text-white":"bg-white text-slate-800"}
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
+                hover:bg-slate-700 hover:text-white
                 `}
                 >DE</button>
             <button 
@@ -55,10 +58,11 @@ const Language_Buttons = (props) => {
                 inline-block
                 rounded-r 
                 px-2
-                border-4 border-white 
+                border-r-4 border-t-4 border-b-4 border-white 
                 ${lang == "en"?"bg-slate-800 text-white":"bg-white text-slate-800"}
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
+                hover:bg-slate-700 hover:text-white
                 `}
                 >EN</button>
         </div>
