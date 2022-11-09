@@ -1,5 +1,5 @@
 const Footer = () => (
-    <div className="footer-wrapper
+    <>
         w-full
         justify-center
         px-1
@@ -9,7 +9,7 @@ const Footer = () => (
             rounded
             w-full
             bg-white">© {new Date().getFullYear()} Gentlemen's Snuff</div>
-    </div>
+    </>
 );
 
 export default Footer;
