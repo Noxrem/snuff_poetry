@@ -9,12 +9,11 @@ import ch from '../constants/ch';   // Swiss German language package
 import { filteredPoems } from '../constants/helpers';   // Function to filter poems
 import { allowedStatusCodes } from 'next/dist/lib/load-custom-routes';
 
-export const Body = ({ poems, count, initPoemIdx }) => {
-    // Router init
-    const { locale, locales, asPath } = useRouter();  // Hook to get the i18n (internationalization) paths
-    //const content = (locale === "en") ? en : de;      // Select language package, depending on i18n locale
+export const Body = ({ poems, count, initPoemIdx, language }) => {
+
+    // Language package
     let content = de;               // Variable containing the current language package
-    switch(locale) {                // Setting the language package according to the locale
+    switch(language) {              // Setting the language package according to the locale
         case "en": content = en;
         break;
         case "de": content = de;
@@ -23,7 +22,7 @@ export const Body = ({ poems, count, initPoemIdx }) => {
         break;
         default: content = de;
     }
-    //const fltPoems = filteredPoems(poems, locale, )
+
     const [poem, setPoem] = useState(poems[initPoemIdx]);
 
     const updatePoem = () => {
