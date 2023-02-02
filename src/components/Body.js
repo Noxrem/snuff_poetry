@@ -2,6 +2,7 @@ import { useState } from 'react';   // To update the poems
 import Poetry_Textbox from "../components/Poetry_Textbox";
 import Poetry_Buttons from "../components/Poetry_Buttons";
 import { getRandomIdx } from '../constants/helpers';
+import { langFilteredPoems } from '../constants/helpers';
 import { useRouter } from 'next/router';
 import de from '../constants/de';   // German language package
 import en from '../constants/en';   // English language package
@@ -23,10 +24,13 @@ export const Body = ({ poems, count, initPoemIdx, language }) => {
         default: content = de;
     }
 
+    
+
     const [poem, setPoem] = useState(poems[initPoemIdx]);
 
     const updatePoem = () => {
-        setPoem(poems[getRandomIdx(count)]);    // Get a new random poem object
+        setPoem(langFilteredPoems(poems, language));    // Get a new random language filtered poem object
+        
     }
 
     return (

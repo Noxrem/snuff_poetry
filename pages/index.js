@@ -6,22 +6,8 @@ import de from '../src/constants/de';   // German language package
 import en from '../src/constants/en';   // English language package
 
 function Homepage({ poems, count, initPoemIdx }) {
-  // const router = useRouter(); // Use router to filter the json data by language 
-  // console.log(router.locale);
-// Router init
+  // Router init
   const { locale, locales, asPath } = useRouter();  // Hook to get the i18n (internationalization) paths
-
-  // let filteredPoems;
-  // if(router.locale != "all") {  // Only apply language filter if a specific language (not "all") is selected
-  //   filteredPoems = Object.values(poems).filter(poem => poem.language == router.locale); // Filter poems for the language locale
-  // }
-  // else {
-  //   filteredPoems = Object.values(poems);
-  // }
-  // const filteredCount = filteredPoems.length;
-  // const filteredRandomIdx = getRandomIdx(filteredCount);
-
-  // console.log(filteredPoems);
 
   return (
     <Layout>
