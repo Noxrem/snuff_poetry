@@ -10,7 +10,7 @@ import ch from '../constants/ch';   // Swiss German language package
 import { filteredPoems } from '../constants/helpers';   // Function to filter poems
 import { allowedStatusCodes } from 'next/dist/lib/load-custom-routes';
 
-export const Body = ({ poems, count, initPoemIdx, initPoem, language }) => {
+export const Body = ({ poems, initPoem, language }) => {
 
     // Language package
     let content = de;               // Variable containing the current language package
