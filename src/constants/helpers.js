@@ -12,7 +12,7 @@ export const getRandomIdx = (count) => {
 }
 
 // Takes an object with poems and returns the ones filtered by the specified language
-export function getLangFilteredPoem(unfltPoems, language) {
+export function getLangFilteredPoems(unfltPoems, language) {
     let fltPoems;
     if(language != "all") {  // Only apply language filter if a specific language (not "all") is selected
         fltPoems = Object.values(unfltPoems).filter(poem => poem.language == language); // Filter poems for the language locale
@@ -20,9 +20,15 @@ export function getLangFilteredPoem(unfltPoems, language) {
     else {
         fltPoems = Object.values(unfltPoems);       // No filtering (Object.values unwraps the array out of the object)
     }
-    // const fltCount = fltPoems.length;               // Get the amount of the filtered poems 
-    // const fltRandomIdx = getRandomIdx(fltCount);    // Get a random index of of the filtered poems
-    // return fltPoems[fltRandomIdx];
-    // return getRandomPoem(fltPoems);
+    return fltPoems;
+}
+
+// Takes an object with poems and returns the ones filtered by the nsfw value
+export function getNsfwFilteredPoems(unfltPoems, nsfw) {
+    let fltPoems;
+    if(nsfw != true && nsfw != false) { // If nsfw value is not defined --> set to false
+        nsfw = false;
+    }
+    fltPoems = Object.values(unfltPoems).filter(poem => poem.nsfw == nsfw); // Filter poems according to nsfw value (true/false)
     return fltPoems;
 }
