@@ -1,8 +1,8 @@
 import { useState } from 'react';   // To update the poems
 import Poetry_Textbox from "../components/Poetry_Textbox";
 import Poetry_Buttons from "../components/Poetry_Buttons";
-import { getRandomIdx } from '../constants/helpers';
-import { langFilteredPoems } from '../constants/helpers';
+import { getRandomIdx, getRandomPoem } from '../constants/helpers';
+import { getLangFilteredPoem } from '../constants/helpers';
 import { useRouter } from 'next/router';
 import de from '../constants/de';   // German language package
 import en from '../constants/en';   // English language package
@@ -10,7 +10,7 @@ import ch from '../constants/ch';   // Swiss German language package
 import { filteredPoems } from '../constants/helpers';   // Function to filter poems
 import { allowedStatusCodes } from 'next/dist/lib/load-custom-routes';
 
-export const Body = ({ poems, count, initPoemIdx, language }) => {
+export const Body = ({ poems, count, initPoemIdx, initPoem, language }) => {
 
     // Language package
     let content = de;               // Variable containing the current language package
@@ -24,12 +24,12 @@ export const Body = ({ poems, count, initPoemIdx, language }) => {
         default: content = de;
     }
 
-    
-
-    const [poem, setPoem] = useState(poems[initPoemIdx]);
+    // const [poem, setPoem] = useState(poems[initPoemIdx]);
+    const [poem, setPoem] = useState(initPoem); // Set the initial poem
 
     const updatePoem = () => {
-        setPoem(langFilteredPoems(poems, language));    // Get a new random language filtered poem object
+        let langFltPoems = getLangFilteredPoem(poems, language);    // Get poems filtered by language 
+        setPoem(getRandomPoem(langFltPoems));                       // Get a new random language filtered poem object
         
     }
 
