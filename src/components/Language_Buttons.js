@@ -1,65 +1,51 @@
-import { useState } from 'react';   // To save button state
-import Link from 'next/link';
-import { useRouter } from 'next/router';    
-
 const Language_Buttons = (props) => {
-    // Initialize router
-    const router = useRouter();     // Get the url router for the locale
-    
-    const [lang, setLang] = useState(router.locale);    // State stores selected language the default is the set router locale
-
-    const updateLang = (lang) => {
-        setLang(lang);  // Set the state to the new language
-        router.push("/", "/", {locale: lang});  // Routes to the chosen locale path
-    }
-
     return (
         <div className="flex flex-row justify-end px-1 py-1" role="group">
             <button 
-                onClick={() => updateLang("all")} 
+                onClick={() => props.updateLang("all")} 
                 className={`
                 inline-block
                 rounded-l 
                 px-2
                 border-l-4 border-t-4 border-b-4 border-white 
-                ${lang == "all"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
+                ${props.language == "all"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
                 hover:bg-slate-700 hover:text-white
                 `}
                 >ALL</button>
             <button 
-                onClick={() => updateLang("ch")} 
+                onClick={() => props.updateLang("ch")} 
                 className={`
                 inline-block
                 px-2
                 border-t-4 border-b-4 border-white 
-                ${lang == "ch"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
+                ${props.language == "ch"?"bg-slate-800 text-white":"bg-white text-slate-800"} 
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
                 hover:bg-slate-700 hover:text-white
                 `}
                 >CH</button>
             <button 
-                onClick={() => updateLang("de")}
+                onClick={() => props.updateLang("de")}
                 className={`
                 inline-block 
                 px-2
                 border-t-4 border-b-4 border-white 
-                ${lang == "de"?"bg-slate-800 text-white":"bg-white text-slate-800"}
+                ${props.language == "de"?"bg-slate-800 text-white":"bg-white text-slate-800"}
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
                 hover:bg-slate-700 hover:text-white
                 `}
                 >DE</button>
             <button 
-                onClick={() => updateLang("en")}
+                onClick={() => props.updateLang("en")}
                 className={`
                 inline-block
                 rounded-r 
                 px-2
                 border-r-4 border-t-4 border-b-4 border-white 
-                ${lang == "en"?"bg-slate-800 text-white":"bg-white text-slate-800"}
+                ${props.language == "en"?"bg-slate-800 text-white":"bg-white text-slate-800"}
                 font-bold text-base
                 focus:bg-slate-800 focus:text-white
                 hover:bg-slate-700 hover:text-white

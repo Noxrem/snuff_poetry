@@ -1,9 +1,5 @@
 const Footer = () => (
     <>
-        {/* w-full
-        justify-center
-        px-1
-        py-1"*/}
         <div className="copyright
             flex justify-center
             rounded
