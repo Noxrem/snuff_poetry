@@ -18,11 +18,17 @@ const Poetry_Textbox = ({ poem }) => (
             bg-white
             text-center
             text-base text-slate-800
-            mb-4
             h-full
             max-h-max
-            overflow-auto">{poem.text}
+            overflow-auto">
+            {poem.text}
         </div>
+        <div className="
+                font-bold
+                text-center text-white
+                mb-1">
+                #{poem.id}
+            </div>
     </>
 );
 
