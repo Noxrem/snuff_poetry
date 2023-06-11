@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Layout from '../src/layouts/Layout';
 import Body from '../src/components/Body';
-import { getRandomPoem, getLangFilteredPoems } from '../src/constants/helpers';
+import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
 import de from '../src/constants/de';   // German language package
 import en from '../src/constants/en';   // English language package
@@ -24,7 +24,8 @@ function Homepage({ poems, initPoem }) {
   // Update the poem
   const updatePoem = () => {
     let langFltPoems = getLangFilteredPoems(poems, language); // Get poems filtered by locale (language)
-    setPoem(getRandomPoem(langFltPoems));                     // Get a new random language filtered poem object
+    let langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, isNsfw);  // Get the poems filtered whether nsfw is acivated or not
+    setPoem(getRandomPoem(langNsfwFltPoems));                     // Get a new random language and nsfw filtered poem object
   }
 
   // Update the nsfw state
@@ -35,6 +36,7 @@ function Homepage({ poems, initPoem }) {
     else {
       setNsfw(true);
     }
+    updatePoem();
   }
   
   return (
@@ -47,8 +49,9 @@ function Homepage({ poems, initPoem }) {
 // Populate the website with the initial poem
 export async function getServerSideProps(context) {
   const poems = await import('/public/schnupf_dataset.json');
-  const langFltPoems = getLangFilteredPoems(poems, context.locale); // Filter poems according to locale (language)
-  const initPoem = getRandomPoem(langFltPoems);                     // Get one random poem
+  const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
+  const langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, false); // Set deactivate nsfw and filter accordingly
+  const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
   return { props: { 
                       poems: JSON.parse(JSON.stringify(poems)), 
                       initPoem
