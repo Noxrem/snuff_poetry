@@ -10,6 +10,7 @@ function Homepage({ poems, initPoem }) {
   // Router init
   const router = useRouter();  // Hook to get the i18n (internationalization) paths
   const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
+  const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
 
   let language = router.locale;             // Initially set the language of the website to the locale
 
@@ -26,9 +27,19 @@ function Homepage({ poems, initPoem }) {
     setPoem(getRandomPoem(langFltPoems));                     // Get a new random language filtered poem object
   }
 
+  // Update the nsfw state
+  const updateNsfw = () => {
+    if(isNsfw) {
+      setNsfw(false); // If nsfw content is on and the switch is turned off, also turn of nsfw content
+    }
+    else {
+      setNsfw(true);
+    }
+  }
+  
   return (
     <Layout updatePoem={updatePoem} updateLang={updateLang} language={language}>
-        <Body poem={poem} updatePoem={updatePoem} language={language}/>
+        <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
     </Layout>
   );
 }
