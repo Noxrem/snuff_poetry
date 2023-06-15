@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer} from 'react'
 import Layout from '../src/layouts/Layout';
 import Body from '../src/components/Body';
 import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
@@ -6,12 +6,38 @@ import { useRouter } from 'next/router';
 import de from '../src/constants/de';   // German language package
 import en from '../src/constants/en';   // English language package
 
+function reducer(state, action) {
+  let isNsfw;
+  let poem;
+
+  switch(action.type) {
+    case 'update_nsfw': {
+      if(state.isNsfw) {
+        isNsfw = false; // If nsfw content is on and the switch is turned off, also turn of nsfw content
+      }
+      else {
+        isNsfw = true;
+      }
+    }
+    case 'update_language' : {
+
+    }
+    case 'update_poem' : {
+
+    }
+    default : {
+      throw Error('Unknown action: ' + action.type);  // Throw an error if the state type is unknown
+    }
+  }
+}
+
 function Homepage({ poems, initPoem }) {
   // Router init
   const router = useRouter();  // Hook to get the i18n (internationalization) paths
-  const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
-
+  const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
+  const [state, dispatch] = useReducer(reducer, {isNsfw: false, poem: initPoem});
+  
   let language = router.locale;             // Initially set the language of the website to the locale
 
   // Update the language of the website
@@ -19,13 +45,6 @@ function Homepage({ poems, initPoem }) {
     language = lang;                        // Update the language when the language_buttons were pressed
     router.push("/", "/", {locale: lang});  // Updates the route and appends the locale
     updatePoem();                           // Update the poem
-  }
-
-  // Update the poem
-  const updatePoem = () => {
-    let langFltPoems = getLangFilteredPoems(poems, language); // Get poems filtered by locale (language)
-    let langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, isNsfw);  // Get the poems filtered whether nsfw is acivated or not
-    setPoem(getRandomPoem(langNsfwFltPoems));                     // Get a new random language and nsfw filtered poem object
   }
 
   // Update the nsfw state
@@ -36,9 +55,19 @@ function Homepage({ poems, initPoem }) {
     else {
       setNsfw(true);
     }
+    console.log("updateNsfw value: " + isNsfw);
     updatePoem();
   }
-  
+
+  // Update the poem
+  const updatePoem = () => {
+    let langFltPoems = getLangFilteredPoems(poems, language); // Get poems filtered by locale (language)
+    let langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, isNsfw);  // Get the poems filtered whether nsfw is acivated or not
+    let newPoem = getRandomPoem(langNsfwFltPoems); // Get a new random language and nsfw filtered poem object
+    setPoem(newPoem);                             // Set the new poem
+    console.log("Id: " + newPoem.id + " title: " + newPoem.title + " isNsfw: " + newPoem.isNsfw + " language: " + newPoem.language);
+  }
+
   return (
     <Layout updatePoem={updatePoem} updateLang={updateLang} language={language}>
         <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
