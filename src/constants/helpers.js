@@ -29,6 +29,6 @@ export function getNsfwFilteredPoems(unfltPoems, nsfw) {
     if(nsfw != true && nsfw != false) { // If nsfw value is not defined --> set to false
         nsfw = false;
     }
-    fltPoems = Object.values(unfltPoems).filter(poem => poem.nsfw == nsfw); // Filter poems according to nsfw value (true/false)
+    fltPoems = Object.values(unfltPoems).filter(poem => poem.isNsfw == nsfw); // Filter poems according to nsfw value (true/false)
     return fltPoems;
 }
