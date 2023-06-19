@@ -1,7 +1,6 @@
 {
   "name": "snuff_poetry",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -21,5 +20,6 @@
     "autoprefixer": "^10.4.5",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
-  }
+  },
+  "description": ""
 }
