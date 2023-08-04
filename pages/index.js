@@ -3,8 +3,6 @@ import Layout from '../src/layouts/Layout';
 import Body from '../src/components/Body';
 import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
-import de from '../src/constants/de';   // German language package
-import en from '../src/constants/en';   // English language package
 
 function Homepage({ poems, initPoem }) {
   // Router init
@@ -12,7 +10,8 @@ function Homepage({ poems, initPoem }) {
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
   const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
   
-  let language = router.locale;             // Initially set the language of the website to the locale
+  //let language = router.locale;             // Initially set the language of the website to the locale
+  let language = "all";                       // Initially set the language of the website to "all"
 
   // Update the language of the website
   const updateLang = (lang) => {
@@ -55,7 +54,8 @@ function Homepage({ poems, initPoem }) {
 // Populate the website with the initial poem
 export async function getServerSideProps(context) {
   const poems = await import('/public/schnupf_dataset.json');
-  const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
+  //const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
+  const langFltPoems = getLangFilteredPoems(poems, "all");            // Filter poems initially according to "all" languages
   const langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, false); // Set deactivate nsfw and filter accordingly
   const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
   return { props: { 
