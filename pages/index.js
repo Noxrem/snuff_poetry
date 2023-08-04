@@ -10,8 +10,7 @@ function Homepage({ poems, initPoem }) {
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
   const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
   
-  //let language = router.locale;             // Initially set the language of the website to the locale
-  let language = "all";                       // Initially set the language of the website to "all"
+  let language = router.locale;             // Initially set the language of the website to the locale
 
   // Update the language of the website
   const updateLang = (lang) => {
