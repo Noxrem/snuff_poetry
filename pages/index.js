@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import Layout from '../src/layouts/Layout';
 import Body from '../src/components/Body';
-import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
+import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems} from '../src/constants/helpers';
 import { useRouter } from 'next/router';
+import { db } from '../src/constants/firebaseConfig'
+import { query, collection, getDocs, orderBy, where } from 'firebase/firestore/lite';
 
 function Homepage({ poems, initPoem }) {
   // Router init
@@ -11,6 +13,19 @@ function Homepage({ poems, initPoem }) {
   const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
   
   let language = router.locale;             // Initially set the language of the website to the locale
+
+  // Run on refresh
+  useEffect(() => {
+    const getPoem = async () => await getPoemsFromFirebase()
+    getPoem();
+  }, []);
+
+  const getPoemsFromFirebase = async () => {
+    const fetchedPoem = await getDocs(query(collection(db, "snuffPoems")));
+    const poemData = fetchedPoem.forEach(poem => {setPoem(poem.data())})
+
+    return poemData;
+  }
 
   // Update the language of the website
   const updateLang = (lang) => {
