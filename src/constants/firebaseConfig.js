@@ -7,15 +7,14 @@ import { getFirestore } from 'firebase/firestore/lite';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDJW6kMPCsuYorFsOas-yT_DUJNNojjL0c",
-  authDomain: "snuff-poetry.firebaseapp.com",
-  projectId: "snuff-poetry",
-  storageBucket: "snuff-poetry.appspot.com",
-  messagingSenderId: "248904715103",
-  appId: "1:248904715103:web:a580b4d90c110071e104ea",
-  measurementId: "G-2XEVN9E1YE"
+  apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FB_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FB_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMENT_ID
 };
 
 // Initialize Firebase
