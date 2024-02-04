@@ -23,7 +23,7 @@ function Homepage({ poems, initPoem }) {
   const getPoemsFromFirebase = async () => {
     const fetchedPoem = await getDocs(query(collection(db, "snuffPoems")));
     const poemData = fetchedPoem.forEach(poem => {setPoem(poem.data())})
-
+    
     return poemData;
   }
 
