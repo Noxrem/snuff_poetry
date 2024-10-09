@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
-import Layout from '../src/layouts/Layout';
-import Body from '../src/components/Body';
 import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
+import Header from '../src/components/Header';
+import Body from '../src/components/Body';
+import Footer from '../src/components/Footer';
+import { Analytics } from "@vercel/analytics/react";  // Adding Vercel analytics
+
 
 function Homepage({ poems, initPoem }) {
   // Router init
@@ -44,9 +47,12 @@ function Homepage({ poems, initPoem }) {
   }, [isNsfw]);
 
   return (
-    <Layout updatePoem={updatePoem} updateLang={updateLang} language={language}>
-        <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
-    </Layout>
+    <div className="flex flex-col min-h-screen">
+      <Header updatePoem={updatePoem} updateLang={updateLang} language={language}/>
+      <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
+      <Footer />
+      <Analytics/>
+    </div>
   );
 }
 
