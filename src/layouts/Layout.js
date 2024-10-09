@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import { Analytics } from "@vercel/analytics/react";  // Adding Vercel analytics
 
 const Layout = (props) => (
-  <div className="site-wrapper h-screen max-h-full flex flex-col">
+  <div className="site-wrapper h-screen min-h-screen flex flex-col">
     <Header {...props}/>
 
     {props.children}
