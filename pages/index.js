@@ -47,7 +47,7 @@ function Homepage({ poems, initPoem }) {
   }, [isNsfw]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen bg-slate-800">
       <Header updatePoem={updatePoem} updateLang={updateLang} language={language}/>
       <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
       <Footer />

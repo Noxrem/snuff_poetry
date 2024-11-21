@@ -18,7 +18,7 @@ const Poetry_Textbox = ({ poem }) => (
             text-center
             text-base text-slate-800
             h-full
-            max-h-max
+            max-h-full
             overflow-auto">
             {poem.text}
         </div>
