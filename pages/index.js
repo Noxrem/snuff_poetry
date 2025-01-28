@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
+import { supabase } from "../src/supabase";
 import Header from '../src/components/Header';
 import Body from '../src/components/Body';
 import Footer from '../src/components/Footer';
@@ -58,13 +59,18 @@ function Homepage({ poems, initPoem }) {
 
 // Populate the website with the initial poem
 export async function getServerSideProps(context) {
-  const poems = await import('/public/schnupf_dataset.json');
+  //const poems = await import('/public/schnupf_dataset.json');
+  const { data: poems, error } = await supabase.from("snuff_poems").select("*");
+  if (error) {
+    console.error("Error fetching poems: ", error);
+    return { props: { poems: [], any } };
+  }
   //const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
   const langFltPoems = getLangFilteredPoems(poems, "all");            // Filter poems initially according to "all" languages
   const langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, false); // Set deactivate nsfw and filter accordingly
   const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
   return { props: { 
-                      poems: JSON.parse(JSON.stringify(poems)), 
+                      poems, 
                       initPoem
                     }
           }
