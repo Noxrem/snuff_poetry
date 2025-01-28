@@ -12,7 +12,7 @@ function Homepage({ poems, initPoem }) {
   // Router init
   const router = useRouter();  // Hook to get the i18n (internationalization) paths
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
-  const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
+  const [poem, setPoem] = useState([]); // State of the current poem and sets the initial poem
   
   let language = router.locale;             // Initially set the language of the website to the locale
 
