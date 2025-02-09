@@ -1,3 +1,4 @@
+import { supabase } from "../supabase";
 
 // Get a random poem object from the poemsArr parameter array
 export function getRandomPoem(poemsArr) {
@@ -31,4 +32,57 @@ export function getNsfwFilteredPoems(unfltPoems, nsfw) {
     }
     fltPoems = Object.values(unfltPoems).filter(poem => poem.isNsfw == nsfw); // Filter poems according to nsfw value (true/false)
     return fltPoems;
+}
+
+// Fetch a random poem filtered by nsfw and language
+export const fetchRandomFilteredPoem = async (isNsfw, language) => {
+    // Step 1: Get the count or rows matching the filters
+    let count, countError;
+    if(language !== "all") {
+        ({ count, error: countError } = await supabase
+            .from("snuff_poems")
+            .select("*", { count: "exact", head: true}) // Only get count, not data
+            .eq("isNsfw", isNsfw)                       // Apply nsfw and language filters
+            .eq("language", language));
+    }
+    else {
+        ({ count, error: countError } = await supabase
+            .from("snuff_poems")
+            .select("*", { count: "exact", head: true}) // Only get count, not data
+            .eq("isNsfw", isNsfw));                       // Apply only nsfw filter
+    }
+
+    console.log("Filtered poems count: ", count);
+    if(countError){
+        console.error("Error fetching row count: ", countError);
+        return;
+    }
+
+    if(!count || count == 0){
+        console.warn("No matching rows found");
+        return;
+    }
+
+    // Step 2: Generate a random index
+    const randomOffset = Math.floor(Math.random() * count);
+
+    // Step 3: Fetch one row using OFFSET
+    let supabaseQuery = await supabase
+    .from("snuff_poems")
+    .select("*")
+    .eq("isNsfw", isNsfw);
+
+    if(language !== "all") {
+        supabaseQuery = supabaseQuery.eq("language", language);  // Apply language filter only when not "all" selected
+    }
+
+    const { data, error } = await supabaseQuery.range(randomOffset, randomOffset);  // Fetch only one row
+
+    
+    if(error) {
+        console.error("Error fetching random row: ", error);
+        return;
+    }
+
+    return data[0]; // Return poem
 }

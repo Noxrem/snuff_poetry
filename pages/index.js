@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems } from '../src/constants/helpers';
+import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems, fetchRandomFilteredRow, fetchRandomFilteredPoem } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
 import { supabase } from "../src/supabase";
 import Header from '../src/components/Header';
@@ -12,7 +12,7 @@ function Homepage({ poems, initPoem }) {
   // Router init
   const router = useRouter();  // Hook to get the i18n (internationalization) paths
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
-  const [poem, setPoem] = useState([]); // State of the current poem and sets the initial poem
+  const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
   
   let language = router.locale;             // Initially set the language of the website to the locale
 
@@ -35,12 +35,10 @@ function Homepage({ poems, initPoem }) {
   }
 
   // Update the poem
-  const updatePoem = () => {
-    let langFltPoems = getLangFilteredPoems(poems, language); // Get poems filtered by locale (language)
-    let langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, isNsfw);  // Get the poems filtered whether nsfw is acivated or not
-    let newPoem = getRandomPoem(langNsfwFltPoems); // Get a new random language and nsfw filtered poem object
+  const updatePoem = async () => {
+    // Get a new random poem that is filtered by nsfw and the language (locale)
+    let newPoem = await fetchRandomFilteredPoem(isNsfw, language);
     setPoem(newPoem);                             // Set the new poem
-   // console.log("Id: " + newPoem.id + " title: " + newPoem.title + " isNsfw: " + newPoem.isNsfw + " language: " + newPoem.language);
   }
 
   useEffect(() => {
@@ -63,12 +61,14 @@ export async function getServerSideProps(context) {
   const { data: poems, error } = await supabase.from("snuff_poems").select("*");
   if (error) {
     console.error("Error fetching poems: ", error);
-    return { props: { poems: [], any } };
+    return { props: { poems: [], initPoem: 0 } };
   }
   //const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
   const langFltPoems = getLangFilteredPoems(poems, "all");            // Filter poems initially according to "all" languages
   const langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, false); // Set deactivate nsfw and filter accordingly
-  const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
+  //const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
+  const initPoem = await fetchRandomFilteredPoem(false, "de");
+  console.log("initial poem: ", initPoem);
   return { props: { 
                       poems, 
                       initPoem
