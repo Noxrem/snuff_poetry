@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getRandomPoem, getLangFilteredPoems, getNsfwFilteredPoems, fetchRandomFilteredRow, fetchRandomFilteredPoem } from '../src/constants/helpers';
 import { useRouter } from 'next/router';
 import { supabase } from "../src/supabase";
@@ -8,19 +8,22 @@ import Footer from '../src/components/Footer';
 import { Analytics } from "@vercel/analytics/react";  // Adding Vercel analytics
 
 
-function Homepage({ poems, initPoem }) {
+function Homepage({ initPoem }) {
   // Router init
   const router = useRouter();  // Hook to get the i18n (internationalization) paths
   const [isNsfw, setNsfw] = useState(false);  // State of the nsfw variable (true = nsfw content is being shown)
   const [poem, setPoem] = useState(initPoem); // State of the current poem and sets the initial poem
+  const [language, setLanguage] = useState(router.locale);  // Store language in a state
+  const firstRender = useRef(true);           // Track the initial render
   
-  let language = router.locale;             // Initially set the language of the website to the locale
+  // let language = router.locale;             // Initially set the language of the website to the locale
 
   // Update the language of the website
   const updateLang = (lang) => {
-    language = lang;                        // Update the language when the language_buttons were pressed
+    setLanguage(lang);                      // Store updated language in state
+    // language = lang;                        // Update the language when the language_buttons were pressed
     router.push("/", "/", {locale: lang});  // Updates the route and appends the locale
-    updatePoem();                           // Update the poem
+    updatePoem(lang);                           // Pass new language to updatePoem
   }
 
   // Update the nsfw state
@@ -35,13 +38,17 @@ function Homepage({ poems, initPoem }) {
   }
 
   // Update the poem
-  const updatePoem = async () => {
+  const updatePoem = async (lang = language) => {
     // Get a new random poem that is filtered by nsfw and the language (locale)
-    let newPoem = await fetchRandomFilteredPoem(isNsfw, language);
+    let newPoem = await fetchRandomFilteredPoem(isNsfw, lang);
     setPoem(newPoem);                             // Set the new poem
   }
 
   useEffect(() => {
+    if (firstRender.current){
+      firstRender.current = false;  // Prevent first effect (initial render) from running updatePoem
+      return;
+    }
     updatePoem(); // Call updatePoem after the isNsfw state has been updated
   }, [isNsfw]);
 
@@ -55,25 +62,11 @@ function Homepage({ poems, initPoem }) {
   );
 }
 
-// Populate the website with the initial poem
+// Fetch initial poem on server-side
 export async function getServerSideProps(context) {
-  //const poems = await import('/public/schnupf_dataset.json');
-  const { data: poems, error } = await supabase.from("snuff_poems").select("*");
-  if (error) {
-    console.error("Error fetching poems: ", error);
-    return { props: { poems: [], initPoem: 0 } };
-  }
-  //const langFltPoems = getLangFilteredPoems(poems, context.locale);   // Filter poems according to locale (language)
-  const langFltPoems = getLangFilteredPoems(poems, "all");            // Filter poems initially according to "all" languages
-  const langNsfwFltPoems = getNsfwFilteredPoems(langFltPoems, false); // Set deactivate nsfw and filter accordingly
-  //const initPoem = getRandomPoem(langNsfwFltPoems);                   // Get one random poem
-  const initPoem = await fetchRandomFilteredPoem(false, "de");
-  console.log("initial poem: ", initPoem);
-  return { props: { 
-                      poems, 
-                      initPoem
-                    }
-          }
+  // Get one random poem
+  const initPoem = await fetchRandomFilteredPoem(false, "all");
+  return { props: { initPoem } };
 }
 export default Homepage;
   
