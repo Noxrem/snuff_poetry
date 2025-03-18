@@ -23,7 +23,8 @@ function Homepage({ initPoem }) {
     setLanguage(lang);                      // Store updated language in state
     // language = lang;                        // Update the language when the language_buttons were pressed
     router.push("/", "/", {locale: lang});  // Updates the route and appends the locale
-    updatePoem(lang);                           // Pass new language to updatePoem
+    // updatePoem(lang);                           // Pass new language to updatePoem
+    updatePoem();                           // Update poem
   }
 
   // Update the nsfw state
@@ -38,10 +39,11 @@ function Homepage({ initPoem }) {
   }
 
   // Update the poem
-  const updatePoem = async (lang = language) => {
+  const updatePoem = async () => {
     // Get a new random poem that is filtered by nsfw and the language (locale)
-    let newPoem = await fetchRandomFilteredPoem(isNsfw, lang);
+    let newPoem = await fetchRandomFilteredPoem(isNsfw, language);
     setPoem(newPoem);                             // Set the new poem
+    console.log("Poem: ", poem.title)
   }
 
   useEffect(() => {
