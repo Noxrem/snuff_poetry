@@ -52,7 +52,7 @@ export const fetchRandomFilteredPoem = async (isNsfw, language) => {
             .eq("isNsfw", isNsfw));                       // Apply only nsfw filter
     }
 
-    console.log("Filtered poems count: ", count);
+    //console.log("Filtered poems count: ", count);
     if(countError){
         console.error("Error fetching row count: ", countError);
         return;
@@ -67,17 +67,6 @@ export const fetchRandomFilteredPoem = async (isNsfw, language) => {
     const randomOffset = Math.floor(Math.random() * count);
 
     // Step 3: Fetch one row using OFFSET
-    // let supabaseQuery = await supabase
-    // .from("snuff_poems")
-    // .select("*")
-    // .eq("isNsfw", isNsfw);
-
-    // if(language !== "all") {
-    //     supabaseQuery = supabaseQuery.eq("language", language);  // Apply language filter only when not "all" selected
-    // }
-
-    // const { data, error } = await supabaseQuery.range(randomOffset, randomOffset);  // Fetch only one row
-
     let data, error;
     if(language !== "all") {
         ({ data, error } = await supabase

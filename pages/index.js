@@ -24,7 +24,7 @@ function Homepage({ initPoem }) {
     // language = lang;                        // Update the language when the language_buttons were pressed
     router.push("/", "/", {locale: lang});  // Updates the route and appends the locale
     // updatePoem(lang);                           // Pass new language to updatePoem
-    updatePoem();                           // Update poem
+    //updatePoem();                           // Update poem
   }
 
   // Update the nsfw state
@@ -42,8 +42,7 @@ function Homepage({ initPoem }) {
   const updatePoem = async () => {
     // Get a new random poem that is filtered by nsfw and the language (locale)
     let newPoem = await fetchRandomFilteredPoem(isNsfw, language);
-    setPoem(newPoem);                             // Set the new poem
-    console.log("Poem: ", poem.title)
+    setPoem(newPoem);               // Set the new poem
   }
 
   useEffect(() => {
@@ -51,11 +50,11 @@ function Homepage({ initPoem }) {
       firstRender.current = false;  // Prevent first effect (initial render) from running updatePoem
       return;
     }
-    updatePoem(); // Call updatePoem after the isNsfw state has been updated
-  }, [isNsfw]);
+    updatePoem(); // Call updatePoem after the isNsfw or language state have been changed
+  }, [isNsfw, language]); 
 
   return (
-    <div className="flex flex-col h-screen bg-slate-800">
+    <div className="flex flex-col h-screen grow max-w-4xl bg-slate-800">
       <Header updatePoem={updatePoem} updateLang={updateLang} language={language}/>
       <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
       <Footer />
@@ -66,9 +65,15 @@ function Homepage({ initPoem }) {
 
 // Fetch initial poem on server-side
 export async function getServerSideProps(context) {
-  // Get one random poem
-  const initPoem = await fetchRandomFilteredPoem(false, "all");
-  return { props: { initPoem } };
+  let _initPoem = 0
+  try {
+    // Get one random poem
+    const initPoem = await fetchRandomFilteredPoem(false, "all");
+    _initPoem = { props: { initPoem } };
+  } catch (error) {
+    _initPoem = { props: null };
+  }
+  return _initPoem;
 }
 export default Homepage;
   
