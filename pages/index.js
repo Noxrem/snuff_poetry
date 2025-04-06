@@ -6,6 +6,7 @@ import Header from '../src/components/Header';
 import Body from '../src/components/Body';
 import Footer from '../src/components/Footer';
 import { Analytics } from "@vercel/analytics/react";  // Adding Vercel analytics
+import { SpeedInsights } from "@vercel/speed-insights/next" // Adding speed insight
 
 
 function Homepage({ initPoem }) {
@@ -58,6 +59,7 @@ function Homepage({ initPoem }) {
       <Header updatePoem={updatePoem} updateLang={updateLang} language={language}/>
       <Body poem={poem} updatePoem={updatePoem} language={language} updateNsfw={updateNsfw} nsfw={isNsfw}/>
       <Footer />
+      <SpeedInsights/>
       <Analytics/>
     </div>
   );
