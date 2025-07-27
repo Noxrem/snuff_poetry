@@ -1,3 +1,3 @@
 export default {
-    greeting: "Willkommen auf der Gentlemen's Snuff Spruch Website.",
+    greeting: "Willkommen auf der Priise.ch Spruch Website.",
 };

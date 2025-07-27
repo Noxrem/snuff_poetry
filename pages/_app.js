@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css';
+import 'tailwindcss/index.css';
 
 function MyApp({ Component, pageProps }) {
     // Website wrapped in div with global color and full viewport

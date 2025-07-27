@@ -1,3 +1,3 @@
 export default {
-    greeting: "Willkomme uf dr Gentlemen's Snuff Spruch Website.",
+    greeting: "Willkomme uf dr Priise.ch Spruch Website.",
 };

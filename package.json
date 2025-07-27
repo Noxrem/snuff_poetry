@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.52.1",
+    "@tailwindcss/postcss": "^4.1.11",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "eslint-config-next": "15.4.4",
