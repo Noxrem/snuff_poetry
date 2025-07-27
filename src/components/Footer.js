@@ -5,7 +5,7 @@ const Footer = () => (
             rounded
             bg-white
             mx-1
-            my-1">© {new Date().getFullYear()} Gentlemen's Snuff</div>
+            my-1">© {new Date().getFullYear()} Priise.ch</div>
     </>
 );
 
