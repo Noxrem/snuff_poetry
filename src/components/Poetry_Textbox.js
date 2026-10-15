@@ -1,4 +1,12 @@
-const Poetry_Textbox = ({ poem }) => (
+const Poetry_Textbox = ({ poem, noPoemText }) => {
+    if (!poem) {
+        return (
+            <div className="grow mt-4 text-center text-white">
+                {noPoemText}
+            </div>
+        );
+    }
+    return (
     <>
         <div className="
             mt-4
@@ -28,6 +36,6 @@ const Poetry_Textbox = ({ poem }) => (
                 #{poem.id}
             </div>
     </>
-);
-
+    );
+}
 export default Poetry_Textbox;
