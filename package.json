@@ -19,6 +19,8 @@
     "@tailwindcss/postcss": "^4.1.11",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "baseline-browser-mapping": "^2.11.28",
+    "caniuse-lite": "^1.0.30001816",
     "eslint-config-next": "15.4.4",
     "next": "15.4.10",
     "npm-check-updates": "^18.0.2",
