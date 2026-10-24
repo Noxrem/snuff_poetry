@@ -36,58 +36,14 @@ export function getNsfwFilteredPoems(unfltPoems, nsfw) {
 
 // Fetch a random poem filtered by nsfw and language
 export const fetchRandomFilteredPoem = async (isNsfw, language) => {
-    // Step 1: Get the count or rows matching the filters
-    let count, countError;
-    if(language !== "all") {
-        ({ count, error: countError } = await supabase
-            .from("snuff_poems")
-            .select("*", { count: "exact", head: true}) // Only get count, not data
-            .eq("isNsfw", isNsfw)                       // Apply nsfw and language filters
-            .eq("language", language));
-    }
-    else {
-        ({ count, error: countError } = await supabase
-            .from("snuff_poems")
-            .select("*", { count: "exact", head: true}) // Only get count, not data
-            .eq("isNsfw", isNsfw));                       // Apply only nsfw filter
-    }
-
-    //console.log("Filtered poems count: ", count);
-    if(countError){
-        console.error("Error fetching row count: ", countError);
-        return;
-    }
-
-    if(!count || count == 0){
-        console.warn("No matching rows found");
-        return;
-    }
-
-    // Step 2: Generate a random index
-    const randomOffset = Math.floor(Math.random() * count);
-
-    // Step 3: Fetch one row using OFFSET
-    let data, error;
-    if(language !== "all") {
-        ({ data, error } = await supabase
-            .from("snuff_poems")
-            .select("*")                                // Select all poems
-            .eq("isNsfw", isNsfw)                       // Apply nsfw and language filters
-            .eq("language", language)
-            .range(randomOffset, randomOffset));        // Fetch only one random row
-    }
-    else {
-        ({ data, error } = await supabase
-            .from("snuff_poems")
-            .select("*")                                // Select all poems
-            .eq("isNsfw", isNsfw)                       // Apply only nsfw filter
-            .range(randomOffset, randomOffset));        // Fetch only one random row
-    }
+    const { data, error } = await supabase
+        .rpc("random_poem", { p_nsfw: isNsfw, p_lang: language })   // Call the Postgres function "random_poem" which is defined in Supabase
+        .maybeSingle();                                 // Expect one or zero rows
     
     if(error) {
-        console.error("Error fetching random row: ", error);
-        return;
+        console.error("Error fetching random poem: ", error);
+        return null;
     }
 
-    return data[0]; // Return poem
+    return data; // Return poem or null if no poem matches
 }

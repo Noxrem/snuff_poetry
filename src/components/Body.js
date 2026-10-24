@@ -32,7 +32,7 @@ export const Body = ({ poem, updatePoem, language, updateNsfw, nsfw}) => {
             >
                 {content.greeting}
             </div>
-            <Poetry_Textbox poem={poem} className=""/>
+            <Poetry_Textbox poem={poem} noPoemText={content.noPoem} className=""/>
             <Poetry_Buttons clickRefresh={updatePoem} clickNsfw={updateNsfw} nsfw={nsfw} className=""/>
         </>
     )
